@@ -13,9 +13,10 @@ public class HlavneOkno extends JFrame
     private JButton buttonSpusti;
     private JButton buttonUkonci;
 
+    private StrategiaA strategiaA;
     private ChartPanel panelStrategiaA;
     private Graf grafStrategiaA;
-    private StrategiaA strategiaA;
+    private JLabel vysledokStrategiaA;
 
     private Thread t1;
 
@@ -28,11 +29,11 @@ public class HlavneOkno extends JFrame
         setVisible(true);
         setContentPane(this.panel);
 
-        this.strategiaA = new StrategiaA(this.grafStrategiaA);
+        this.strategiaA = new StrategiaA(this.grafStrategiaA, this.vysledokStrategiaA);
 
         this.buttonSpusti.addActionListener(e -> {
             new Thread(() -> {
-                this.strategiaA.simuluj(100000, 0, false);
+                this.strategiaA.simuluj(100000000, 0, false);
             }).start();
         });
 

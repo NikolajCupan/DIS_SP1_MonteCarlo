@@ -8,6 +8,8 @@ import org.example.Generatory.SpojityEmpirickyGenerator;
 import org.example.Generatory.SpojityRovnomernyGenerator;
 import org.example.Ostatne.Konstanty;
 
+import javax.swing.*;
+
 public class StrategiaA extends SimulacneJadro
 {
     private GeneratorNasad generatorNasad;
@@ -16,15 +18,17 @@ public class StrategiaA extends SimulacneJadro
     private SpojityEmpirickyGenerator spojityEmpirickyGenerator;
     private SpojityRovnomernyGenerator spojityRovnomernyGenerator;
 
-    private int curIteracia;
+    private int pocetIteracii;
     private double sucetVysledkov;
     private double mesacneSplatkySpolu;
 
     private Graf graf;
+    private JLabel labelVysledok;
 
-    public StrategiaA(Graf graf)
+    public StrategiaA(Graf graf, JLabel labelVysledok)
     {
         this.graf = graf;
+        this.labelVysledok = labelVysledok;
     }
 
     @Override
@@ -45,19 +49,20 @@ public class StrategiaA extends SimulacneJadro
         };
         this.spojityEmpirickyGenerator = new SpojityEmpirickyGenerator(skupiny, this.generatorNasad);
 
-        this.curIteracia = 0;
+        this.pocetIteracii = 0;
         this.sucetVysledkov = 0.0;
     }
 
     @Override
     protected void poReplikaciach()
     {
+        this.labelVysledok.setText("Vysledok strategia A: " + this.sucetVysledkov / this.pocetIteracii);
     }
 
     @Override
     protected void predReplikaciou()
     {
-        this.curIteracia++;
+        this.pocetIteracii++;
         this.mesacneSplatkySpolu = 0.0;
     }
 
@@ -66,10 +71,10 @@ public class StrategiaA extends SimulacneJadro
     {
         this.sucetVysledkov += this.mesacneSplatkySpolu;
 
-        //if (this.curIteracia > 100000 && this.curIteracia % 1000 == 0)
-        //{
-            this.graf.pridajHodnotu(this.curIteracia, this.sucetVysledkov / this.curIteracia);
-        //}
+        if (this.pocetIteracii > 500000 && this.pocetIteracii % 10000 == 0)
+        {
+            this.graf.pridajHodnotu(this.pocetIteracii, this.sucetVysledkov / this.pocetIteracii);
+        }
     }
 
     @Override
