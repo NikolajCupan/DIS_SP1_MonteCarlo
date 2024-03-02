@@ -11,6 +11,9 @@ public class HlavneOkno extends JFrame
     private JButton buttonSpusti;
     private JButton buttonUkonci;
 
+    private JTextField inputPocetReplikacii;
+    private JTextField inputNasada;
+
     private StrategiaA strategiaA;
     private ChartPanel panelStrategiaA;
     private Graf grafStrategiaA;
@@ -27,11 +30,22 @@ public class HlavneOkno extends JFrame
 
         this.strategiaA = new StrategiaA(this.grafStrategiaA, this.vysledokStrategiaA);
 
-        this.buttonSpusti.addActionListener(e ->
-            new Thread(() ->
-                this.strategiaA.simuluj(100000000, 0, false)
-            ).start()
-        );
+        this.buttonSpusti.addActionListener(e -> {
+            try
+            {
+                int pocetReplikacii = Integer.parseInt(this.inputPocetReplikacii.getText());
+                boolean nasadaZadana = !this.inputNasada.getText().isEmpty();
+                int nasada = (nasadaZadana ? Integer.parseInt(this.inputNasada.getText()) : 0);
+
+                new Thread(() ->
+                    this.strategiaA.simuluj(pocetReplikacii, nasada, nasadaZadana)
+                ).start();
+            }
+            catch (Exception ex)
+            {
+                JOptionPane.showMessageDialog(HlavneOkno.this, "Neplatny pocet replikacii!");
+            }
+        });
 
         this.buttonUkonci.addActionListener(e -> this.strategiaA.ukonciSimulaciu());
     }
