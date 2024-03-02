@@ -4,8 +4,17 @@ import org.example.GUI.HlavneOkno;
 
 public class Main
 {
+    public static char REZIM = 'G';
+
     public static void main(String[] args)
     {
-         new HlavneOkno();
+        if (Main.REZIM == 'G')
+        {
+            new HlavneOkno();
+        }
+        else if (Main.REZIM == 'T')
+        {
+            // TEST
+        }
     }
 }
