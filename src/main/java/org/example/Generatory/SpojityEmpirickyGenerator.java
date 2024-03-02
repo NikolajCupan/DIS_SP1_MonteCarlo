@@ -16,7 +16,7 @@ public class SpojityEmpirickyGenerator implements ISpojityGenerator
     {
         this.validujVstupy(skupiny);
 
-        this.generatorSkupiny = new SpojityRovnomernyGenerator(0, 1, generatorNasad);
+        this.generatorSkupiny = new SpojityRovnomernyGenerator(0.0, 1.0, generatorNasad);
         this.randoms = new SpojityRovnomernyGenerator[skupiny.length];
         this.pravdepodobnosti = new double[skupiny.length];
 

@@ -13,6 +13,7 @@ public class GeneratorNasad
 
     public GeneratorNasad(int nasada)
     {
+        System.out.println("Bola pevne stanovena nasada generatora nasad: " + nasada + "!");
         this.random = new Random(nasada);
     }
 
