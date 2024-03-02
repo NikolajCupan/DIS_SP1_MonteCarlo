@@ -2,11 +2,15 @@ package org.example.Simulacia;
 
 public class Helper
 {
+    // rocnaUrokovaSadzba zadana vo forme percent
+    // <0.0; 100.0>
     public static double mesacnaUrokovaSadzba(double rocnaUrokovaSadzba)
     {
         return (rocnaUrokovaSadzba / 100.0) / 12.0;
     }
 
+    // Vypocet M
+    // zostavajuceRoky = n
     public static double mesacnaSplatka(double vyskaIstiny, double rocnaUrokovaSadzba, int zostavajuceRoky)
     {
         double mesacnaUrokovaSadzba = Helper.mesacnaUrokovaSadzba(rocnaUrokovaSadzba);
@@ -17,6 +21,9 @@ public class Helper
         return citatel / menovatel;
     }
 
+    // Vypocet S
+    // zostavajuceRoky = n
+    // splateneRoky    = m
     public static double zostatokIstiny(double vyskaIstiny, double rocnaUrokovaSadzba, int zostavajuceRoky,
                                         int splateneRoky)
     {

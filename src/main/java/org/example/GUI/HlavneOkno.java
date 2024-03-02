@@ -4,8 +4,6 @@ import org.example.Simulacia.StrategiaA;
 import org.jfree.chart.ChartPanel;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class HlavneOkno extends JFrame
 {
@@ -38,7 +36,7 @@ public class HlavneOkno extends JFrame
         });
 
         this.buttonUkonci.addActionListener(e -> {
-            this.strategiaA.ukonci();
+            this.strategiaA.ukonciSimulaciu();
         });
     }
 
