@@ -16,8 +16,6 @@ public class HlavneOkno extends JFrame
     private Graf grafStrategiaA;
     private JLabel vysledokStrategiaA;
 
-    private Thread t1;
-
     public HlavneOkno()
     {
         setTitle("Aplikácia - Nikolaj Cupan");
@@ -29,15 +27,13 @@ public class HlavneOkno extends JFrame
 
         this.strategiaA = new StrategiaA(this.grafStrategiaA, this.vysledokStrategiaA);
 
-        this.buttonSpusti.addActionListener(e -> {
-            new Thread(() -> {
-                this.strategiaA.simuluj(100000000, 0, false);
-            }).start();
-        });
+        this.buttonSpusti.addActionListener(e ->
+            new Thread(() ->
+                this.strategiaA.simuluj(100000000, 0, false)
+            ).start()
+        );
 
-        this.buttonUkonci.addActionListener(e -> {
-            this.strategiaA.ukonciSimulaciu();
-        });
+        this.buttonUkonci.addActionListener(e -> this.strategiaA.ukonciSimulaciu());
     }
 
     public void createUIComponents()
