@@ -19,16 +19,28 @@ public class HlavneOkno extends JFrame
     private Graf grafStrategiaA;
     private JLabel vysledokStrategiaA;
 
+    private StrategiaA strategiaB;
+    private ChartPanel panelStrategiaB;
+    private Graf grafStrategiaB;
+    private JLabel vysledokStrategiaB;
+
+    private StrategiaA strategiaC;
+    private ChartPanel panelStrategiaC;
+    private Graf grafStrategiaC;
+    private JLabel vysledokStrategiaC;
+
     public HlavneOkno()
     {
         setTitle("Aplikácia - Nikolaj Cupan");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(1250, 750);
+        setSize(1550, 750);
         setLocationRelativeTo(null);
         setVisible(true);
         setContentPane(this.panel);
 
         this.strategiaA = new StrategiaA(this.grafStrategiaA, this.vysledokStrategiaA);
+        this.strategiaB = new StrategiaA(this.grafStrategiaB, this.vysledokStrategiaB);
+        this.strategiaC = new StrategiaA(this.grafStrategiaC, this.vysledokStrategiaC);
 
         this.buttonSpusti.addActionListener(e -> {
             try
@@ -37,9 +49,9 @@ public class HlavneOkno extends JFrame
                 boolean nasadaZadana = !this.inputNasada.getText().isEmpty();
                 int nasada = (nasadaZadana ? Integer.parseInt(this.inputNasada.getText()) : 0);
 
-                new Thread(() ->
-                    this.strategiaA.simuluj(pocetReplikacii, nasada, nasadaZadana)
-                ).start();
+                new Thread(() -> this.strategiaA.simuluj(pocetReplikacii, nasada, nasadaZadana)).start();
+                new Thread(() -> this.strategiaB.simuluj(pocetReplikacii, nasada, nasadaZadana)).start();
+                new Thread(() -> this.strategiaC.simuluj(pocetReplikacii, nasada, nasadaZadana)).start();
             }
             catch (Exception ex)
             {
@@ -47,12 +59,22 @@ public class HlavneOkno extends JFrame
             }
         });
 
-        this.buttonUkonci.addActionListener(e -> this.strategiaA.ukonciSimulaciu());
+        this.buttonUkonci.addActionListener(e -> {
+            this.strategiaA.ukonciSimulaciu();
+            this.strategiaB.ukonciSimulaciu();
+            this.strategiaC.ukonciSimulaciu();
+        });
     }
 
     public void createUIComponents()
     {
         this.grafStrategiaA = new Graf("Strategia A");
         this.panelStrategiaA = new ChartPanel(this.grafStrategiaA.getGraf());
+
+        this.grafStrategiaB = new Graf("Strategia B");
+        this.panelStrategiaB = new ChartPanel(this.grafStrategiaB.getGraf());
+
+        this.grafStrategiaC = new Graf("Strategia C");
+        this.panelStrategiaC = new ChartPanel(this.grafStrategiaC.getGraf());
     }
 }
