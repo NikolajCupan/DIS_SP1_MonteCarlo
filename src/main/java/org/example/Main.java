@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 
 public class Main
 {
-    private static char REZIM = 'T';
+    private static char REZIM = 'G';
     private static String MENO_SUBORU = "test.txt";
 
     public static void main(String[] args)

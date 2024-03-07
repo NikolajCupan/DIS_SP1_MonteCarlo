@@ -2,16 +2,18 @@ package org.example.Simulacia;
 
 public abstract class SimulacneJadro
 {
-    public boolean pokracuj = true;
+    private boolean pokracuj = true;
+    protected int pocetReplikacii;
 
     public void simuluj(int pocetReplikacii, int nasada, boolean pouziNasadu)
     {
         this.validujVstupy(pocetReplikacii);
+        this.pocetReplikacii = pocetReplikacii;
 
         // Samotne simulacne jadro
         this.predReplikaciami(nasada, pouziNasadu);
 
-        for (int i = 0; i < pocetReplikacii; i++)
+        for (int i = 0; i < this.pocetReplikacii; i++)
         {
             predReplikaciou();
             replikacia();

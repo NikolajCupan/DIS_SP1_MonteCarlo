@@ -70,7 +70,7 @@ public class StrategiaA extends SimulacneJadro
     {
         this.sucetMesacnychSplatok += this.mesacneSplatkySpoluIteracia;
 
-        if (this.pocetVykonanychIteracii > Konstanty.POCET_NEZOBRAZENYCH_ITERACII
+        if (this.pocetVykonanychIteracii > (Konstanty.PERCENTO_NEZOBRAZENYCH_REPLIKACII * this.pocetReplikacii)
             && this.pocetVykonanychIteracii % Konstanty.KROK_AKTUALIZACIA_GRAFU == 0)
         {
             this.graf.pridajHodnotu(this.pocetVykonanychIteracii, this.sucetMesacnychSplatok / this.pocetVykonanychIteracii);
