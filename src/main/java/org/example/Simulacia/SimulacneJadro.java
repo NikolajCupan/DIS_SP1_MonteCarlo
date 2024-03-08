@@ -15,9 +15,9 @@ public abstract class SimulacneJadro
 
         for (int i = 0; i < this.pocetReplikacii; i++)
         {
-            predReplikaciou();
-            replikacia();
-            poReplikacii();
+            this.predReplikaciou();
+            this.replikacia();
+            this.poReplikacii();
 
             if (!this.pokracuj)
             {
