@@ -1,6 +1,8 @@
 package org.example.Generatory.Ostatne;
 
-public class DeterministickyGenerator<T>
+import org.example.Generatory.Rozhrania.IGenerator;
+
+public class DeterministickyGenerator<T> implements IGenerator
 {
     private final T hodnota;
 

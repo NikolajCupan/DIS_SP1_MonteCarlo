@@ -4,8 +4,6 @@ import org.example.GUI.Graf;
 import org.example.Generatory.DiskretnyRovnomernyGenerator;
 import org.example.Generatory.Ostatne.DeterministickyGenerator;
 import org.example.Generatory.Ostatne.GeneratorNasad;
-import org.example.Generatory.Ostatne.SkupinaEmpirickyGenerator;
-import org.example.Generatory.SpojityEmpirickyGenerator;
 import org.example.Generatory.SpojityRovnomernyGenerator;
 import org.example.Ostatne.Konstanty;
 import org.example.Simulacia.Helper;

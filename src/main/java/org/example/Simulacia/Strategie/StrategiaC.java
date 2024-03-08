@@ -2,7 +2,6 @@ package org.example.Simulacia.Strategie;
 
 import org.example.GUI.Graf;
 import org.example.Generatory.DiskretnyRovnomernyGenerator;
-import org.example.Generatory.Ostatne.DeterministickyGenerator;
 import org.example.Generatory.Ostatne.GeneratorNasad;
 import org.example.Generatory.Ostatne.SkupinaEmpirickyGenerator;
 import org.example.Generatory.SpojityEmpirickyGenerator;
