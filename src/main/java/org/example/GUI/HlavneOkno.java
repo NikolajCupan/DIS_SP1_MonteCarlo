@@ -1,6 +1,8 @@
 package org.example.GUI;
 
-import org.example.Simulacia.StrategiaA;
+import org.example.Simulacia.Strategie.StrategiaA;
+import org.example.Simulacia.Strategie.StrategiaB;
+import org.example.Simulacia.Strategie.StrategiaC;
 import org.jfree.chart.ChartPanel;
 
 import javax.swing.*;
@@ -19,12 +21,12 @@ public class HlavneOkno extends JFrame
     private Graf grafStrategiaA;
     private JLabel vysledokStrategiaA;
 
-    private StrategiaA strategiaB;
+    private StrategiaB strategiaB;
     private ChartPanel panelStrategiaB;
     private Graf grafStrategiaB;
     private JLabel vysledokStrategiaB;
 
-    private StrategiaA strategiaC;
+    private StrategiaC strategiaC;
     private ChartPanel panelStrategiaC;
     private Graf grafStrategiaC;
     private JLabel vysledokStrategiaC;
@@ -39,8 +41,8 @@ public class HlavneOkno extends JFrame
         setContentPane(this.panel);
 
         this.strategiaA = new StrategiaA(this.grafStrategiaA, this.vysledokStrategiaA);
-        this.strategiaB = new StrategiaA(this.grafStrategiaB, this.vysledokStrategiaB);
-        this.strategiaC = new StrategiaA(this.grafStrategiaC, this.vysledokStrategiaC);
+        this.strategiaB = new StrategiaB(this.grafStrategiaB, this.vysledokStrategiaB);
+        this.strategiaC = new StrategiaC(this.grafStrategiaC, this.vysledokStrategiaC);
 
         this.buttonSpusti.addActionListener(e -> {
             try

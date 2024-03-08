@@ -7,7 +7,7 @@ public class Konstanty
     public static final int POCET_ROKOV = 10;
 
     public static final double PERCENTO_NEZOBRAZENYCH_REPLIKACII = 0.10;
-    public static final double PERCENTO_KROK_AKTUALIZACIA_GRAFU = 0.005;
+    public static final double PERCENTO_KROK_AKTUALIZACIA_GRAFU = 0.001;
 
     public static final double ODSADENIE_HRANICNE_HODNOTY = 0.1;
 }
