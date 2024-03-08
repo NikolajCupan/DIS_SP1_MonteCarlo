@@ -1,5 +1,6 @@
 package org.example.GUI;
 
+import org.example.Generatory.Ostatne.GeneratorNasad;
 import org.example.Simulacia.Strategie.StrategiaA;
 import org.example.Simulacia.Strategie.StrategiaB;
 import org.example.Simulacia.Strategie.StrategiaC;
@@ -51,9 +52,13 @@ public class HlavneOkno extends JFrame
                 boolean nasadaZadana = !this.inputNasada.getText().isEmpty();
                 int nasada = (nasadaZadana ? Integer.parseInt(this.inputNasada.getText()) : 0);
 
-                new Thread(() -> this.strategiaA.simuluj(pocetReplikacii, nasada, nasadaZadana)).start();
-                new Thread(() -> this.strategiaB.simuluj(pocetReplikacii, nasada, nasadaZadana)).start();
-                new Thread(() -> this.strategiaC.simuluj(pocetReplikacii, nasada, nasadaZadana)).start();
+                // Za ucelom, aby kazda strategia mala vlastnu nasadu pre svoj vlastny generator nasad,
+                // tento generator generuje nasady pre dalsie generatory nasad
+                GeneratorNasad generatorNasad = (nasadaZadana ? new GeneratorNasad(nasada) : new GeneratorNasad());
+
+                new Thread(() -> this.strategiaA.simuluj(pocetReplikacii, generatorNasad.nasada(), nasadaZadana)).start();
+                new Thread(() -> this.strategiaB.simuluj(pocetReplikacii, generatorNasad.nasada(), nasadaZadana)).start();
+                new Thread(() -> this.strategiaC.simuluj(pocetReplikacii, generatorNasad.nasada(), nasadaZadana)).start();
             }
             catch (Exception ex)
             {
