@@ -37,3 +37,5 @@ build/
 ### Mac OS ###
 .DS_Store
 /test.txt
+/out/artifacts/DISSP1_jar/DISSP1.jar
+/src/main/resources/META-INF/MANIFEST.MF
