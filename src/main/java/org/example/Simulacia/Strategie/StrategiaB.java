@@ -24,11 +24,13 @@ public class StrategiaB extends SimulacneJadro
 
     private final Graf graf;
     private final JLabel labelVysledok;
+    private final double vyskaIstiny;
 
-    public StrategiaB(Graf graf, JLabel labelVysledok)
+    public StrategiaB(Graf graf, JLabel labelVysledok, double vyskaIstiny)
     {
         this.graf = graf;
         this.labelVysledok = labelVysledok;
+        this.vyskaIstiny = vyskaIstiny;
     }
 
     @Override
@@ -64,17 +66,19 @@ public class StrategiaB extends SimulacneJadro
     {
         this.sucetMesacnychSplatok += this.mesacneSplatkySpoluIteracia;
 
+        int vykreslenyBod = (int)Math.ceil((double)this.pocetReplikacii / Konstanty.POCET_VYKRESLENYCH_BODOV);
         if (this.pocetVykonanychIteracii > (Konstanty.PERCENTO_NEZOBRAZENYCH_REPLIKACII * this.pocetReplikacii)
-            && this.pocetVykonanychIteracii % (Konstanty.PERCENTO_KROK_AKTUALIZACIA_GRAFU * this.pocetReplikacii) == 0)
+            && this.pocetVykonanychIteracii % vykreslenyBod == 0)
         {
             this.graf.pridajHodnotu(this.pocetVykonanychIteracii, this.sucetMesacnychSplatok / this.pocetVykonanychIteracii);
+            this.labelVysledok.setText("Vysledok strategie B: " + this.sucetMesacnychSplatok / this.pocetVykonanychIteracii);
         }
     }
 
     @Override
     protected void replikacia()
     {
-        double zostavajucaIstina = Konstanty.VYSKA_ISTINY;
+        double zostavajucaIstina = this.vyskaIstiny;
 
 
         // Fixacia na 3 roky

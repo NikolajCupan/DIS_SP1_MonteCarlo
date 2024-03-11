@@ -11,8 +11,8 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 public class Graf
 {
-    private final JFreeChart graf;
-    private final XYSeries dataset;
+    private JFreeChart graf;
+    private XYSeries dataset;
 
     private double curMaxHodnota;
     private double curMinHodnota;
@@ -53,5 +53,12 @@ public class Graf
     public JFreeChart getGraf()
     {
         return this.graf;
+    }
+
+    public void resetuj()
+    {
+        this.dataset.clear();
+        this.curMaxHodnota = Integer.MIN_VALUE;
+        this.curMinHodnota = Integer.MAX_VALUE;
     }
 }

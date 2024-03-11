@@ -32,6 +32,8 @@ public class HlavneOkno extends JFrame
     private Graf grafStrategiaC;
     private JLabel vysledokStrategiaC;
 
+    private JTextField inputIstina;
+
     public HlavneOkno()
     {
         setTitle("Aplikácia - Nikolaj Cupan");
@@ -41,13 +43,15 @@ public class HlavneOkno extends JFrame
         setVisible(true);
         setContentPane(this.panel);
 
-        this.strategiaA = new StrategiaA(this.grafStrategiaA, this.vysledokStrategiaA);
-        this.strategiaB = new StrategiaB(this.grafStrategiaB, this.vysledokStrategiaB);
-        this.strategiaC = new StrategiaC(this.grafStrategiaC, this.vysledokStrategiaC);
-
         this.buttonSpusti.addActionListener(e -> {
             try
             {
+                this.ukonciSimulaciu();
+                this.resetujGrafy();
+                this.resetujPopisy();
+
+                double vyskaIstiny = Double.parseDouble(this.inputIstina.getText());
+
                 int pocetReplikacii = Integer.parseInt(this.inputPocetReplikacii.getText());
                 boolean nasadaZadana = !this.inputNasada.getText().isEmpty();
                 int nasada = (nasadaZadana ? Integer.parseInt(this.inputNasada.getText()) : 0);
@@ -56,21 +60,21 @@ public class HlavneOkno extends JFrame
                 // tento generator generuje nasady pre dalsie generatory nasad
                 GeneratorNasad generatorNasad = (nasadaZadana ? new GeneratorNasad(nasada) : new GeneratorNasad());
 
+                this.strategiaA = new StrategiaA(this.grafStrategiaA, this.vysledokStrategiaA, vyskaIstiny);
+                this.strategiaB = new StrategiaB(this.grafStrategiaB, this.vysledokStrategiaB, vyskaIstiny);
+                this.strategiaC = new StrategiaC(this.grafStrategiaC, this.vysledokStrategiaC, vyskaIstiny);
+
                 new Thread(() -> this.strategiaA.simuluj(pocetReplikacii, generatorNasad.nasada(), nasadaZadana)).start();
                 new Thread(() -> this.strategiaB.simuluj(pocetReplikacii, generatorNasad.nasada(), nasadaZadana)).start();
                 new Thread(() -> this.strategiaC.simuluj(pocetReplikacii, generatorNasad.nasada(), nasadaZadana)).start();
             }
             catch (Exception ex)
             {
-                JOptionPane.showMessageDialog(HlavneOkno.this, "Neplatny pocet replikacii!");
+                JOptionPane.showMessageDialog(HlavneOkno.this, "Neplatne zadane parametre simulacie!");
             }
         });
 
-        this.buttonUkonci.addActionListener(e -> {
-            this.strategiaA.ukonciSimulaciu();
-            this.strategiaB.ukonciSimulaciu();
-            this.strategiaC.ukonciSimulaciu();
-        });
+        this.buttonUkonci.addActionListener(e -> this.ukonciSimulaciu());
     }
 
     public void createUIComponents()
@@ -83,5 +87,29 @@ public class HlavneOkno extends JFrame
 
         this.grafStrategiaC = new Graf("Strategia C");
         this.panelStrategiaC = new ChartPanel(this.grafStrategiaC.getGraf());
+    }
+
+    private void resetujGrafy()
+    {
+        this.grafStrategiaA.resetuj();
+        this.grafStrategiaB.resetuj();
+        this.grafStrategiaC.resetuj();
+    }
+
+    private void resetujPopisy()
+    {
+        this.vysledokStrategiaA.setText("Vysledok strategia A: n/a");
+        this.vysledokStrategiaB.setText("Vysledok strategia B: n/a");
+        this.vysledokStrategiaC.setText("Vysledok strategia C: n/a");
+    }
+
+    private void ukonciSimulaciu()
+    {
+        if (this.strategiaA != null && this.strategiaB != null && this.strategiaC != null)
+        {
+            this.strategiaA.ukonciSimulaciu();
+            this.strategiaB.ukonciSimulaciu();
+            this.strategiaC.ukonciSimulaciu();
+        }
     }
 }
